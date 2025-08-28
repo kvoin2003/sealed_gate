@@ -179,7 +179,7 @@ function initParallaxEffect() {
 // ===== PLACEHOLDER ИЗОБРАЖЕНИЯ =====
 function initImagePlaceholders() {
     const placeholders = [
-        { selector: '.logo', content: 'SR', style: 'logo' },
+        { selector: '.logo', content: 'SG', style: 'logo' },
         { selector: '.character-image', content: '🎮', style: 'character' },
         { selector: '.screenshot-img', content: '🖼️', style: 'screenshot' },
         { selector: '.video-thumbnail', content: '▶️', style: 'video' }
