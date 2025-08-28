@@ -68,7 +68,7 @@ body {
 .logo {
     width: 40px;
     height: 40px;
-    margin-right: 12px;
+    margin-right: 18px; /* Increased from 12px to 18px for better spacing */
     background: var(--gradient-primary);
     border-radius: 8px;
     display: flex;
@@ -236,7 +236,7 @@ body {
         #3E2723 50%,
         #5D4037 100%
     );
-    z-index: -1;
+    z-index: -3;
 }
 
 
@@ -795,6 +795,16 @@ body {
 .copyright {
     color: var(--text-muted);
     margin: 0;
+}
+
+.copyright a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.copyright a:hover {
+    color: var(--primary-hover);
 }
 
 .footer-links {
