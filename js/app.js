@@ -156,15 +156,15 @@ function initAnimationsOnScroll() {
 
 // ===== ПАРАЛЛАКС ЭФФЕКТ =====
 function initParallaxEffect() {
-    const heroVideo = document.querySelector('.hero-video');
+    const heroBg = document.querySelector('.hero-bg');
     const floatingOrbs = document.querySelectorAll('.floating-orb');
     
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         const rate = scrolled * -0.3;
         
-        if (heroVideo) {
-            heroVideo.style.transform = `translateY(${rate}px)`;
+        if (heroBg) {
+            heroBg.style.transform = `translateY(${rate}px)`;
         }
         
         // Параллакс для орбов
