@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowRealm - Эпическая RPG Игра</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="ShadowRealm" class="logo">
+                <span class="brand-text">ShadowRealm</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Об игре</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#screenshots">Скриншоты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#requirements">Требования</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">FAQ</a>
+                    </li>
+                </ul>
+                <div class="nav-buttons ms-3">
+                    <a href="#" class="btn btn-outline-light me-2">Трейлер</a>
+                    <a href="#" class="btn btn-primary">Играть сейчас</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-bg">
+            <video autoplay muted loop class="hero-video">
+                <source src="videos/hero-bg.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <div class="game-info">
+                            <h1 class="game-title">ShadowRealm</h1>
+                            <p class="developer">Dark Studio Games</p>
+                            <div class="game-tags">
+                                <span class="tag">Action</span>
+                                <span class="tag">Adventure</span>
+                                <span class="tag">RPG</span>
+                            </div>
+                        </div>
+                        
+                        <div class="platform-info">
+                            <p class="available-text">Доступно на</p>
+                            <div class="platform-icons">
+                                <i class="fab fa-windows"></i>
+                                <i class="fab fa-steam"></i>
+                                <i class="fab fa-playstation"></i>
+                                <i class="fab fa-xbox"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-actions">
+                            <a href="#" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-download"></i>
+                                Купить сейчас
+                            </a>
+                            <a href="#" class="btn btn-outline-light btn-lg">
+                                <i class="fas fa-play"></i>
+                                Смотреть трейлер
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image">
+                        <img src="images/hero-character.png" alt="Game Character" class="character-image">
+                        <div class="floating-elements">
+                            <div class="floating-orb orb-1"></div>
+                            <div class="floating-orb orb-2"></div>
+                            <div class="floating-orb orb-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section class="quick-start-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Начните играть прямо сейчас</h2>
+                    <p class="section-subtitle">Выберите набор и погрузитесь в захватывающее приключение!</p>
+                    <a href="#" class="btn btn-primary btn-xl">
+                        <i class="fas fa-rocket"></i>
+                        Настроить игру
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Скриншоты и видео</h2>
+                </div>
+            </div>
+            
+            <div class="screenshots-grid">
+                <div class="screenshot-item main-screenshot" data-bs-toggle="modal" data-bs-target="#screenshotModal">
+                    <img src="images/screenshot-1.jpg" alt="Подземелья теней" class="screenshot-img">
+                    <div class="screenshot-overlay">
+                        <h3>Подземелья теней</h3>
+                        <p>Исследуйте древние катакомбы</p>
+                    </div>
+                </div>
+                
+                <div class="screenshot-item" data-bs-toggle="modal" data-bs-target="#screenshotModal">
+                    <img src="images/screenshot-2.jpg" alt="Королевская крепость" class="screenshot-img">
+                    <div class="screenshot-overlay">
+                        <h3>Королевская крепость</h3>
+                        <p>Величественные замки и города</p>
+                    </div>
+                </div>
+                
+                <div class="screenshot-item" data-bs-toggle="modal" data-bs-target="#screenshotModal">
+                    <img src="images/screenshot-3.jpg" alt="Мистический лес" class="screenshot-img">
+                    <div class="screenshot-overlay">
+                        <h3>Мистический лес</h3>
+                        <p>Таинственные чащи и секреты</p>
+                    </div>
+                </div>
+                
+                <div class="screenshot-item" data-bs-toggle="modal" data-bs-target="#screenshotModal">
+                    <img src="images/screenshot-4.jpg" alt="Драконье логово" class="screenshot-img">
+                    <div class="screenshot-overlay">
+                        <h3>Драконье логово</h3>
+                        <p>Сражения с эпическими боссами</p>
+                    </div>
+                </div>
+                
+                <div class="screenshot-item" data-bs-toggle="modal" data-bs-target="#screenshotModal">
+                    <img src="images/screenshot-5.jpg" alt="Небесный город" class="screenshot-img">
+                    <div class="screenshot-overlay">
+                        <h3>Небесный город</h3>
+                        <p>Летающие острова и чудеса</p>
+                    </div>
+                </div>
+                
+                <div class="screenshot-item" data-bs-toggle="modal" data-bs-target="#screenshotModal">
+                    <img src="images/screenshot-6.jpg" alt="Арена PvP" class="screenshot-img">
+                    <div class="screenshot-overlay">
+                        <h3>Арена PvP</h3>
+                        <p>Сражения между игроками</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Game Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Об игре</h2>
+                    <div class="about-content">
+                        <p class="lead">
+                            ShadowRealm - это эпическая RPG-игра, которая перенесет вас в мир магии, 
+                            приключений и бесконечных возможностей. Создайте своего уникального героя 
+                            и отправляйтесь в незабываемое путешествие.
+                        </p>
+                        
+                        <p>
+                            Исследуйте огромный открытый мир, полный тайн и опасностей. Сражайтесь с 
+                            мифическими существами, собирайте легендарное снаряжение и развивайте 
+                            своего персонажа, выбирая из множества классов и способностей.
+                        </p>
+                        
+                        <div class="game-features">
+                            <div class="feature-item">
+                                <i class="fas fa-sword"></i>
+                                <div>
+                                    <h4>Эпические сражения</h4>
+                                    <p>Динамичная боевая система с комбо и специальными способностями</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <i class="fas fa-users"></i>
+                                <div>
+                                    <h4>Кооперативный режим</h4>
+                                    <p>Играйте с друзьями в команде до 4 игроков</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <i class="fas fa-map"></i>
+                                <div>
+                                    <h4>Огромный мир</h4>
+                                    <p>Более 50 уникальных локаций для исследования</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-media">
+                        <div class="gameplay-video">
+                            <img src="images/gameplay-preview.jpg" alt="Gameplay" class="video-thumbnail">
+                            <div class="play-button" data-bs-toggle="modal" data-bs-target="#videoModal">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Requirements -->
+    <section id="requirements" class="requirements-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Системные требования</h2>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="requirements-tabs">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-windows-tab" data-bs-toggle="tab" data-bs-target="#nav-windows" type="button" role="tab">
+                                    <i class="fab fa-windows"></i>
+                                    Windows
+                                </button>
+                                <button class="nav-link" id="nav-mac-tab" data-bs-toggle="tab" data-bs-target="#nav-mac" type="button" role="tab">
+                                    <i class="fab fa-apple"></i>
+                                    macOS
+                                </button>
+                                <button class="nav-link" id="nav-linux-tab" data-bs-toggle="tab" data-bs-target="#nav-linux" type="button" role="tab">
+                                    <i class="fab fa-linux"></i>
+                                    Linux
+                                </button>
+                            </div>
+                        </nav>
+                        
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-windows" role="tabpanel">
+                                <div class="requirements-content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="req-column">
+                                                <h4>Минимальные</h4>
+                                                <div class="req-item">
+                                                    <strong>ОС:</strong>
+                                                    <span>Windows 10 64-bit</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Процессор:</strong>
+                                                    <span>Intel Core i3-6100 / AMD FX-6300</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Память:</strong>
+                                                    <span>8 GB ОЗУ</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Видеокарта:</strong>
+                                                    <span>NVIDIA GTX 960 / AMD R9 280</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Место на диске:</strong>
+                                                    <span>25 GB свободного места</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="req-column recommended">
+                                                <h4>Рекомендуемые</h4>
+                                                <div class="req-item">
+                                                    <strong>ОС:</strong>
+                                                    <span>Windows 11 64-bit</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Процессор:</strong>
+                                                    <span>Intel Core i5-8400 / AMD Ryzen 5 2600</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Память:</strong>
+                                                    <span>16 GB ОЗУ</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Видеокарта:</strong>
+                                                    <span>NVIDIA GTX 1660 / AMD RX 580</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Место на диске:</strong>
+                                                    <span>35 GB свободного места (SSD)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-pane fade" id="nav-mac" role="tabpanel">
+                                <div class="requirements-content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="req-column">
+                                                <h4>Минимальные</h4>
+                                                <div class="req-item">
+                                                    <strong>ОС:</strong>
+                                                    <span>macOS 10.15 Catalina</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Процессор:</strong>
+                                                    <span>Intel Core i5 2.7GHz</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Память:</strong>
+                                                    <span>8 GB ОЗУ</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Видеокарта:</strong>
+                                                    <span>Intel Iris Pro 5200</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Место на диске:</strong>
+                                                    <span>25 GB свободного места</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="req-column recommended">
+                                                <h4>Рекомендуемые</h4>
+                                                <div class="req-item">
+                                                    <strong>ОС:</strong>
+                                                    <span>macOS 12 Monterey</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Процессор:</strong>
+                                                    <span>Apple M1 / Intel Core i7</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Память:</strong>
+                                                    <span>16 GB ОЗУ</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Видеокарта:</strong>
+                                                    <span>Apple M1 GPU / AMD Radeon Pro</span>
+                                                </div>
+                                                <div class="req-item">
+                                                    <strong>Место на диске:</strong>
+                                                    <span>35 GB свободного места (SSD)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-pane fade" id="nav-linux" role="tabpanel">
+                                <div class="requirements-content">
+                                    <p class="text-center text-muted">Скоро будет доступно</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Часто задаваемые вопросы</h2>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion faq-accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                    <i class="fas fa-gift"></i>
+                                    Какие преимущества покупки через официальный магазин?
+                                </button>
+                            </h2>
+                            <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Покупая игру через официальный магазин, вы получаете гарантированно лицензионную копию, 
+                                    доступ к обновлениям, техническую поддержку и специальные предложения для игроков.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                    <i class="fas fa-shield-alt"></i>
+                                    Безопасно ли совершать покупки в магазине?
+                                </button>
+                            </h2>
+                            <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Да, магазин использует самые современные технологии шифрования и соответствует 
+                                    стандарту PCI DSS Level 1. Все платежи полностью безопасны и защищены.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                    <i class="fas fa-clock"></i>
+                                    Как быстро я получу игру после покупки?
+                                </button>
+                            </h2>
+                            <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    После успешной оплаты ключ игры будет отправлен на вашу электронную почту. 
+                                    Обычно это занимает менее 5 минут. Для предзаказов ключ приходит в день релиза.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq4">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+                                    <i class="fas fa-gamepad"></i>
+                                    Поддерживает ли игра контроллеры?
+                                </button>
+                            </h2>
+                            <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Да, игра полностью поддерживает Xbox и PlayStation контроллеры, а также большинство 
+                                    других популярных геймпадов. Настройки управления можно изменить в меню игры.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq5">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5">
+                                    <i class="fas fa-globe"></i>
+                                    Есть ли поддержка русского языка?
+                                </button>
+                            </h2>
+                            <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Да, игра полностью локализована на русский язык, включая субтитры, интерфейс и 
+                                    все игровые тексты. Также доступна русская озвучка основных персонажей.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="footer-content">
+                        <div class="footer-logo">
+                            <img src="images/logo.png" alt="ShadowRealm" class="logo">
+                            <span class="brand-text">ShadowRealm</span>
+                        </div>
+                        <p class="footer-description">
+                            Погрузитесь в мир приключений и магии. ShadowRealm - это игра, 
+                            которая изменит ваше представление о RPG жанре.
+                        </p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-discord"></i></a>
+                            <a href="#"><i class="fab fa-vk"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-steam"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="footer-section">
+                                <h5>Игра</h5>
+                                <ul>
+                                    <li><a href="#">Скачать</a></li>
+                                    <li><a href="#">Системные требования</a></li>
+                                    <li><a href="#">Руководство</a></li>
+                                    <li><a href="#">Обновления</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="footer-section">
+                                <h5>Поддержка</h5>
+                                <ul>
+                                    <li><a href="#">Техподдержка</a></li>
+                                    <li><a href="#">Сообщество</a></li>
+                                    <li><a href="#">Багрепорты</a></li>
+                                    <li><a href="#">Контакты</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="footer-divider">
+            
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <p class="copyright">
+                        © 2025 Dark Studio Games. Все права защищены.
+                    </p>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <div class="footer-links">
+                        <a href="#">Политика конфиденциальности</a>
+                        <a href="#">Условия использования</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Screenshot Modal -->
+    <div class="modal fade" id="screenshotModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Скриншот игры</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <img src="" alt="Screenshot" class="img-fluid w-100" id="modalScreenshot">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Геймплей трейлер</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

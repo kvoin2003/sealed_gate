@@ -1,0 +1,507 @@
+// ===== MAIN SCRIPT FOR SEALED GATE STYLE =====
+
+document.addEventListener('DOMContentLoaded', function() {
+    initScrollEffects();
+    initNavbarScroll();
+    initSmoothScrolling();
+    initScreenshotModal();
+    initVideoModal();
+    initAnimationsOnScroll();
+    initParallaxEffect();
+    initImagePlaceholders();
+});
+
+// ===== ЭФФЕКТЫ ПРИ СКРОЛЛЕ =====
+function initScrollEffects() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+            }
+        });
+    }, observerOptions);
+
+    // Наблюдаем за элементами
+    const animatedElements = document.querySelectorAll(
+        '.screenshot-item, .feature-item, .req-column, .accordion-item'
+    );
+    
+    animatedElements.forEach(el => {
+        el.classList.add('loading');
+        observer.observe(el);
+    });
+}
+
+// ===== ИЗМЕНЕНИЕ НАВБАРА ПРИ СКРОЛЛЕ =====
+function initNavbarScroll() {
+    const navbar = document.querySelector('.navbar');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        // Скрытие/показ навбара при скролле
+        if (currentScrollY > lastScrollY && currentScrollY > 200) {
+            navbar.style.transform = 'translateY(-100%)';
+        } else {
+            navbar.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollY = currentScrollY;
+    });
+}
+
+// ===== ПЛАВНАЯ ПРОКРУТКА =====
+function initSmoothScrolling() {
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Обновляем активный пункт
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Закрываем мобильное меню
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        bootstrap.Collapse.getInstance(navbarCollapse).hide();
+                    }
+                }
+            }
+        });
+    });
+}
+
+// ===== МОДАЛЬНОЕ ОКНО СКРИНШОТОВ =====
+function initScreenshotModal() {
+    const screenshotItems = document.querySelectorAll('.screenshot-item');
+    const modalImg = document.querySelector('#modalScreenshot');
+    
+    screenshotItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const img = this.querySelector('.screenshot-img');
+            const title = this.querySelector('h3');
+            
+            if (img && modalImg) {
+                modalImg.src = img.src;
+                modalImg.alt = title ? title.textContent : 'Screenshot';
+                
+                const modalTitle = document.querySelector('#screenshotModal .modal-title');
+                if (modalTitle && title) {
+                    modalTitle.textContent = title.textContent;
+                }
+            }
+        });
+    });
+}
+
+// ===== МОДАЛЬНОЕ ОКНО ВИДЕО =====
+function initVideoModal() {
+    const videoModal = document.getElementById('videoModal');
+    const iframe = videoModal.querySelector('iframe');
+    
+    videoModal.addEventListener('hidden.bs.modal', function() {
+        // Останавливаем видео при закрытии модального окна
+        const currentSrc = iframe.src;
+        iframe.src = '';
+        iframe.src = currentSrc;
+    });
+}
+
+// ===== АНИМАЦИИ ПРИ ПОЯВЛЕНИИ =====
+function initAnimationsOnScroll() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('loaded');
+                }, index * 100);
+            }
+        });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.loading');
+    elements.forEach(el => observer.observe(el));
+}
+
+// ===== ПАРАЛЛАКС ЭФФЕКТ =====
+function initParallaxEffect() {
+    const heroVideo = document.querySelector('.hero-video');
+    const floatingOrbs = document.querySelectorAll('.floating-orb');
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.3;
+        
+        if (heroVideo) {
+            heroVideo.style.transform = `translateY(${rate}px)`;
+        }
+        
+        // Параллакс для орбов
+        floatingOrbs.forEach((orb, index) => {
+            const speed = 0.2 + (index * 0.1);
+            const yPos = scrolled * speed;
+            orb.style.transform = `translateY(${yPos}px)`;
+        });
+    });
+}
+
+// ===== PLACEHOLDER ИЗОБРАЖЕНИЯ =====
+function initImagePlaceholders() {
+    const placeholders = [
+        { selector: '.logo', content: 'SR', style: 'logo' },
+        { selector: '.character-image', content: '🎮', style: 'character' },
+        { selector: '.screenshot-img', content: '🖼️', style: 'screenshot' },
+        { selector: '.video-thumbnail', content: '▶️', style: 'video' }
+    ];
+    
+    placeholders.forEach(({ selector, content, style }) => {
+        const elements = document.querySelectorAll(selector);
+        
+        elements.forEach((element, index) => {
+            if (element.tagName === 'IMG') {
+                createImagePlaceholder(element, content, style, index);
+            } else if (style === 'logo') {
+                element.textContent = content;
+            }
+        });
+    });
+}
+
+function createImagePlaceholder(imgElement, content, style, index) {
+    const placeholder = document.createElement('div');
+    placeholder.className = `placeholder placeholder-${style}`;
+    
+    const baseStyles = {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'var(--bg-secondary)',
+        border: '1px solid var(--border-color)',
+        color: 'var(--text-secondary)',
+        fontSize: '2rem',
+        fontWeight: 'bold'
+    };
+    
+    const styleVariants = {
+        logo: {
+            width: '40px',
+            height: '40px',
+            borderRadius: '8px',
+            background: 'var(--gradient-primary)',
+            color: 'white',
+            fontSize: '1rem'
+        },
+        character: {
+            width: '100%',
+            height: '400px',
+            fontSize: '6rem',
+            background: 'linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary))'
+        },
+        screenshot: {
+            width: '100%',
+            height: '250px',
+            fontSize: '3rem',
+            background: `linear-gradient(135deg, 
+                hsl(${220 + index * 30}, 20%, 15%), 
+                hsl(${220 + index * 30}, 20%, 25%))`
+        },
+        video: {
+            width: '100%',
+            height: '300px',
+            fontSize: '4rem',
+            background: 'linear-gradient(135deg, var(--bg-primary), var(--bg-secondary))'
+        }
+    };
+    
+    const styles = { ...baseStyles, ...styleVariants[style] };
+    
+    Object.assign(placeholder.style, styles);
+    placeholder.textContent = content;
+    
+    // Заменяем изображение на placeholder
+    imgElement.style.display = 'none';
+    imgElement.parentNode.insertBefore(placeholder, imgElement);
+}
+
+// ===== АКТИВНЫЙ ПУНКТ НАВИГАЦИИ =====
+function updateActiveNavItem() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    
+    window.addEventListener('scroll', () => {
+        let currentSection = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (window.pageYOffset >= sectionTop) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+}
+
+// ===== ЭФФЕКТЫ ДЛЯ КНОПОК =====
+function initButtonEffects() {
+    const buttons = document.querySelectorAll('.btn');
+    
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+        
+        button.addEventListener('mousedown', function() {
+            this.style.transform = 'translateY(0)';
+        });
+        
+        button.addEventListener('mouseup', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+    });
+}
+
+// ===== АНИМАЦИЯ СЧЕТЧИКОВ =====
+function animateCounters() {
+    const counters = document.querySelectorAll('[data-counter]');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = parseInt(entry.target.dataset.counter);
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    entry.target.textContent = Math.floor(current).toLocaleString();
+                }, 16);
+                
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+    
+    counters.forEach(counter => observer.observe(counter));
+}
+
+// ===== LAZY LOADING ДЛЯ ИЗОБРАЖЕНИЙ =====
+function initLazyLoading() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => {
+        img.classList.add('lazy');
+        imageObserver.observe(img);
+    });
+}
+
+// ===== ОБРАБОТКА ФОРМ =====
+function initFormHandling() {
+    const forms = document.querySelectorAll('form');
+    
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Показываем индикатор загрузки
+            const submitBtn = this.querySelector('[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Отправка...';
+            submitBtn.disabled = true;
+            
+            // Симуляция отправки
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Показываем уведомление об успехе
+                showNotification('Форма успешно отправлена!', 'success');
+            }, 2000);
+        });
+    });
+}
+
+// ===== СИСТЕМА УВЕДОМЛЕНИЙ =====
+function showNotification(message, type = 'info', duration = 3000) {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    
+    const colors = {
+        info: 'var(--primary-color)',
+        success: 'var(--success-color)',
+        warning: 'var(--warning-color)',
+        error: 'var(--danger-color)'
+    };
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--bg-secondary);
+        border: 1px solid ${colors[type]};
+        border-left: 4px solid ${colors[type]};
+        color: var(--text-primary);
+        padding: 16px 20px;
+        border-radius: 8px;
+        box-shadow: var(--shadow-lg);
+        z-index: 9999;
+        min-width: 300px;
+        animation: slideInRight 0.3s ease-out;
+    `;
+    
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="color: ${colors[type]};">
+                ${type === 'success' ? '✓' : type === 'error' ? '✗' : type === 'warning' ? '⚠' : 'ℹ'}
+            </div>
+            <div>${message}</div>
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="background: none; border: none; color: var(--text-secondary); cursor: pointer; margin-left: auto;">×</button>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    if (duration > 0) {
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease-in forwards';
+            setTimeout(() => notification.remove(), 300);
+        }, duration);
+    }
+}
+
+// ===== ГОРЯЧИЕ КЛАВИШИ =====
+function initKeyboardShortcuts() {
+    document.addEventListener('keydown', function(e) {
+        // Escape - закрытие модальных окон
+        if (e.key === 'Escape') {
+            const openModals = document.querySelectorAll('.modal.show');
+            openModals.forEach(modal => {
+                bootstrap.Modal.getInstance(modal)?.hide();
+            });
+        }
+        
+        // Ctrl/Cmd + K - фокус на поиск (если есть)
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            const searchInput = document.querySelector('[type="search"]');
+            if (searchInput) {
+                searchInput.focus();
+            }
+        }
+    });
+}
+
+// ===== ИНИЦИАЛИЗАЦИЯ ДОПОЛНИТЕЛЬНЫХ ФУНКЦИЙ =====
+document.addEventListener('DOMContentLoaded', function() {
+    updateActiveNavItem();
+    initButtonEffects();
+    animateCounters();
+    initLazyLoading();
+    initFormHandling();
+    initKeyboardShortcuts();
+});
+
+// ===== CSS СТИЛИ ДЛЯ АНИМАЦИЙ =====
+const additionalStyles = document.createElement('style');
+additionalStyles.textContent = `
+    @keyframes slideInRight {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slideOutRight {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+    
+    .lazy {
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .lazy.loaded {
+        opacity: 1;
+    }
+    
+    .placeholder {
+        transition: all 0.3s ease;
+    }
+    
+    .placeholder:hover {
+        transform: scale(1.02);
+        filter: brightness(1.1);
+    }
+    
+    .loading {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+    }
+    
+    .loading.loaded {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .navbar {
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+`;
+document.head.appendChild(additionalStyles);
