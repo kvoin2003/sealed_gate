@@ -660,10 +660,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
-}
-
-.footer-logo .logo {
-    margin-right: 15px;
+    gap: 6px;
 }
 
 .footer-description {
