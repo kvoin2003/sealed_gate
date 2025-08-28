@@ -167,7 +167,7 @@ function initializeNavigation() {
     document.head.appendChild(style);
 }
 
-// Smooth Scrolling
+// Smooth Scrolling and Active Navigation
 function initializeSmoothScrolling() {
     const navLinks = document.querySelectorAll('.nav-link');
     
@@ -185,6 +185,9 @@ function initializeSmoothScrolling() {
                     behavior: 'smooth'
                 });
                 
+                // Update active navigation
+                updateActiveNavigation(targetId);
+                
                 // Close mobile menu if open
                 const navMenu = document.querySelector('.nav-menu');
                 const hamburger = document.querySelector('.hamburger');
@@ -194,6 +197,35 @@ function initializeSmoothScrolling() {
                 }
             }
         });
+    });
+    
+    // Update active navigation on scroll
+    window.addEventListener('scroll', updateActiveNavigationOnScroll);
+}
+
+function updateActiveNavigation(activeId) {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === activeId) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+function updateActiveNavigationOnScroll() {
+    const sections = document.querySelectorAll('section[id]');
+    const scrollPos = window.scrollY + 100;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = '#' + section.getAttribute('id');
+        
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            updateActiveNavigation(sectionId);
+        }
     });
 }
 
@@ -369,11 +401,134 @@ function initializeCustomCursor() {
 // Initialize custom cursor (uncomment to enable)
 // initializeCustomCursor();
 
-// Page Loading Animation
+// Page Loading Animation and Enhanced Effects
 window.addEventListener('load', function() {
     document.body.style.opacity = '1';
-    document.body.style.transition = 'opacity 0.5s ease';
+    document.body.style.transition = 'opacity 0.8s ease';
+    
+    // Initialize enhanced cursor effect
+    initializeEnhancedCursor();
+    
+    // Initialize scroll reveal animations
+    initializeScrollRevealAnimations();
 });
+
+// Enhanced cursor effect
+function initializeEnhancedCursor() {
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    cursor.style.cssText = `
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(circle, rgba(0, 212, 255, 0.8) 0%, rgba(0, 212, 255, 0.2) 70%, transparent 100%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.15s ease;
+        mix-blend-mode: screen;
+        opacity: 0;
+    `;
+    document.body.appendChild(cursor);
+    
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.opacity = '1';
+    });
+    
+    document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+    });
+    
+    function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.1;
+        cursorY += (mouseY - cursorY) * 0.1;
+        
+        cursor.style.left = cursorX - 10 + 'px';
+        cursor.style.top = cursorY - 10 + 'px';
+        
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+    
+    // Enhanced hover effects
+    const hoverElements = document.querySelectorAll('a, button, .service-card, .portfolio-item, .stat-item');
+    
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'scale(2)';
+            cursor.style.background = 'radial-gradient(circle, rgba(139, 92, 246, 0.8) 0%, rgba(139, 92, 246, 0.2) 70%, transparent 100%)';
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'scale(1)';
+            cursor.style.background = 'radial-gradient(circle, rgba(0, 212, 255, 0.8) 0%, rgba(0, 212, 255, 0.2) 70%, transparent 100%)';
+        });
+    });
+}
+
+// Enhanced scroll reveal animations
+function initializeScrollRevealAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-animate');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements for animation
+    const animatedElements = document.querySelectorAll('.section-title, .section-subtitle, .service-card, .portfolio-item, .stat-item, .contact-item');
+    animatedElements.forEach((el, index) => {
+        el.style.animationDelay = `${index * 0.1}s`;
+        observer.observe(el);
+    });
+    
+    // Add CSS for reveal animations
+    const style = document.createElement('style');
+    style.textContent = `
+        .section-title,
+        .section-subtitle,
+        .service-card,
+        .portfolio-item,
+        .stat-item,
+        .contact-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .reveal-animate {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        .service-card.reveal-animate {
+            animation: slideInUp 0.8s ease forwards;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
 
 // Add initial loading state
 document.body.style.opacity = '0';
