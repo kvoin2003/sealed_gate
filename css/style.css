@@ -1,26 +1,26 @@
 /* ===== ОСНОВНЫЕ СТИЛИ В СТИЛЕ SEALED GATE ===== */
 :root {
-    --primary-color: #3b82f6;
-    --primary-hover: #2563eb;
-    --secondary-color: #64748b;
-    --accent-color: #f59e0b;
+    --primary-color: #A0522D;
+    --primary-hover: #8B4513;
+    --secondary-color: #8B7355;
+    --accent-color: #D2691E;
     --success-color: #10b981;
     --danger-color: #ef4444;
-    --warning-color: #f59e0b;
+    --warning-color: #D2691E;
     
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --bg-tertiary: #334155;
+    --bg-primary: #2F1B14;
+    --bg-secondary: #3E2723;
+    --bg-tertiary: #5D4037;
     
     --text-primary: #f8fafc;
-    --text-secondary: #cbd5e1;
-    --text-muted: #64748b;
+    --text-secondary: #E8D5C7;
+    --text-muted: #A0888B;
     
-    --border-color: #334155;
-    --border-light: #475569;
+    --border-color: #5D4037;
+    --border-light: #6D4C41;
     
-    --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-    --gradient-secondary: linear-gradient(135deg, #64748b 0%, #334155 100%);
+    --gradient-primary: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+    --gradient-secondary: linear-gradient(135deg, #8B7355 0%, #5D4037 100%);
     
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -44,7 +44,7 @@ body {
 
 /* ===== НАВИГАЦИЯ ===== */
 .navbar {
-    background: rgba(15, 23, 42, 0.95);
+    background: rgba(47, 27, 20, 0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-color);
     padding: 1rem 0;
@@ -52,7 +52,7 @@ body {
 }
 
 .navbar.scrolled {
-    background: rgba(15, 23, 42, 0.98);
+    background: rgba(47, 27, 20, 0.98);
     box-shadow: var(--shadow-lg);
 }
 
@@ -99,7 +99,7 @@ body {
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
     color: var(--text-primary) !important;
-    background: rgba(59, 130, 246, 0.1);
+    background: rgba(160, 82, 45, 0.1);
 }
 
 .navbar-toggler {
@@ -160,6 +160,34 @@ body {
     background: var(--bg-secondary);
     border-color: var(--text-primary);
     color: var(--text-primary);
+}
+
+.btn-white {
+    background: white;
+    color: var(--primary-color);
+    border: 1px solid white;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-white:hover {
+    background: #f8f9fa;
+    color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-brown {
+    background: var(--gradient-primary);
+    color: white;
+    border: 1px solid var(--primary-color);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-brown:hover {
+    background: var(--primary-hover);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 .btn-lg {
