@@ -662,6 +662,10 @@ body {
     margin-bottom: 1rem;
 }
 
+.footer-logo .logo {
+    margin-right: 15px;
+}
+
 .footer-description {
     color: var(--text-secondary);
     line-height: 1.7;
