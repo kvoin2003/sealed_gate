@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sealed Gate - Игровые карты и наборы</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="images/logo.svg" alt="Sealed Gate" class="logo">
+                <span class="brand-text">Sealed Gate</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#home" class="nav-link active">Главная</a>
+                <a href="#packs" class="nav-link">Наборы</a>
+                <a href="#opening" class="nav-link">Вскрытие</a>
+                <a href="#collection" class="nav-link">Коллекция</a>
+                <a href="#profile" class="nav-link">Профиль</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="btn btn-secondary">Вход</button>
+                <button class="btn btn-primary">Регистрация</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Открой свою судьбу</h1>
+                <p class="hero-subtitle">Вскрывай наборы, собирай коллекции и сражайся с лучшими картами</p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-large">Начать игру</button>
+                    <button class="btn btn-outline btn-large">Узнать больше</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="card-stack">
+                    <div class="card card-1"></div>
+                    <div class="card card-2"></div>
+                    <div class="card card-3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Packs -->
+    <section class="featured-packs" id="packs">
+        <div class="container">
+            <h2 class="section-title">Популярные наборы</h2>
+            <div class="packs-grid">
+                <div class="pack-card">
+                    <div class="pack-image">
+                        <div class="pack-placeholder mystical"></div>
+                    </div>
+                    <h3 class="pack-title">Мистический портал</h3>
+                    <p class="pack-description">Редкие карты с магическими способностями</p>
+                    <div class="pack-price">299 ₽</div>
+                    <button class="btn btn-primary">Купить набор</button>
+                </div>
+                <div class="pack-card">
+                    <div class="pack-image">
+                        <div class="pack-placeholder legendary"></div>
+                    </div>
+                    <h3 class="pack-title">Легендарная коллекция</h3>
+                    <p class="pack-description">Эксклюзивные карты героев</p>
+                    <div class="pack-price">499 ₽</div>
+                    <button class="btn btn-primary">Купить набор</button>
+                </div>
+                <div class="pack-card">
+                    <div class="pack-image">
+                        <div class="pack-placeholder cosmic"></div>
+                    </div>
+                    <h3 class="pack-title">Космические врата</h3>
+                    <p class="pack-description">Футуристические карты технологий</p>
+                    <div class="pack-price">399 ₽</div>
+                    <button class="btn btn-primary">Купить набор</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pack Opening Section -->
+    <section class="pack-opening" id="opening">
+        <div class="container">
+            <div class="opening-content">
+                <h2 class="section-title">Симулятор вскрытия</h2>
+                <p class="section-subtitle">Попробуй удачу прямо сейчас</p>
+                <div class="opening-simulator">
+                    <div class="pack-preview">
+                        <div class="pack-animation">
+                            <div class="pack-sealed"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-large opening-btn">Вскрыть набор</button>
+                    <div class="revealed-cards" id="revealed-cards"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">250K+</div>
+                    <div class="stat-label">Открытых наборов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Активных игроков</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Уникальных карт</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Поддержка</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="nav-brand">
+                        <span class="brand-text">Sealed Gate</span>
+                    </div>
+                    <p class="footer-description">Лучшая платформа для открытия наборов и коллекционирования карт</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Игра</h4>
+                        <a href="#">Наборы</a>
+                        <a href="#">Коллекция</a>
+                        <a href="#">Турниры</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Поддержка</h4>
+                        <a href="#">Помощь</a>
+                        <a href="#">Контакты</a>
+                        <a href="#">FAQ</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Сообщество</h4>
+                        <a href="#">Discord</a>
+                        <a href="#">Telegram</a>
+                        <a href="#">VKontakte</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sealed Gate. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
