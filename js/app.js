@@ -40,7 +40,6 @@ function initScrollEffects() {
 // ===== ИЗМЕНЕНИЕ НАВБАРА ПРИ СКРОЛЛЕ =====
 function initNavbarScroll() {
     const navbar = document.querySelector('.navbar');
-    let lastScrollY = window.scrollY;
 
     window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
@@ -51,15 +50,6 @@ function initNavbarScroll() {
         } else {
             navbar.classList.remove('scrolled');
         }
-
-        // Скрытие/показ навбара при скролле
-        if (currentScrollY > lastScrollY && currentScrollY > 200) {
-            navbar.style.transform = 'translateY(-100%)';
-        } else {
-            navbar.style.transform = 'translateY(0)';
-        }
-        
-        lastScrollY = currentScrollY;
     });
 }
 
