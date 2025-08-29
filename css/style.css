@@ -91,6 +91,27 @@ body {
     padding: 8px 16px !important;
     border-radius: 8px;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navbar-nav .nav-link i {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover i,
+.navbar-nav .nav-link.active i {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+@media (min-width: 992px) {
+    .navbar-nav .nav-link i {
+        display: none;
+    }
 }
 
 .navbar-nav .nav-link:hover,
@@ -101,24 +122,220 @@ body {
 
 .navbar-toggler {
     border: none;
-    padding: 4px;
-    width: 30px;
-    height: 30px;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
     position: relative;
+    border-radius: 8px;
+    background: rgba(160, 82, 45, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.navbar-toggler:hover {
+    background: rgba(160, 82, 45, 0.2);
+    transform: scale(1.05);
 }
 
 .navbar-toggler span {
     display: block;
-    width: 22px;
-    height: 2px;
+    width: 24px;
+    height: 3px;
     background: var(--text-primary);
-    margin: 4px 0;
-    transition: all 0.3s ease;
-    border-radius: 1px;
+    margin: 3px 0;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border-radius: 2px;
+    transform-origin: center;
+    position: relative;
+}
+
+/* Анимация бургера в X */
+.navbar-toggler[aria-expanded="true"] span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+    background: var(--primary-color);
+}
+
+.navbar-toggler[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.navbar-toggler[aria-expanded="true"] span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+    background: var(--primary-color);
+}
+
+.navbar-toggler[aria-expanded="true"] {
+    background: rgba(160, 82, 45, 0.3);
+    transform: scale(1.1);
 }
 
 .nav-buttons .btn {
     margin-left: 8px;
+}
+
+/* ===== МОБИЛЬНОЕ МЕНЮ ===== */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: linear-gradient(135deg, rgba(47, 27, 20, 0.98) 0%, rgba(30, 20, 15, 0.98) 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 80px 0 40px 0;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 9999;
+        border-left: 2px solid var(--primary-color);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar-collapse.show {
+        right: 0;
+    }
+
+    .navbar-collapse::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: -100vw;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: all 0.4s ease;
+        z-index: -1;
+    }
+
+    .navbar-collapse.show::before {
+        left: 0;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        padding: 20px 30px;
+        height: 100%;
+        justify-content: flex-start;
+    }
+
+    .navbar-nav .nav-item {
+        margin: 8px 0;
+        opacity: 0;
+        transform: translateX(30px);
+        transition: all 0.3s ease;
+    }
+
+    .navbar-collapse.show .nav-item {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .navbar-collapse.show .nav-item:nth-child(1) { transition-delay: 0.1s; }
+    .navbar-collapse.show .nav-item:nth-child(2) { transition-delay: 0.15s; }
+    .navbar-collapse.show .nav-item:nth-child(3) { transition-delay: 0.2s; }
+    .navbar-collapse.show .nav-item:nth-child(4) { transition-delay: 0.25s; }
+    .navbar-collapse.show .nav-item:nth-child(5) { transition-delay: 0.3s; }
+
+    .navbar-nav .nav-link {
+        color: var(--text-primary) !important;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 15px 20px !important;
+        margin: 0 !important;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .navbar-nav .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(160, 82, 45, 0.3), transparent);
+        transition: all 0.5s ease;
+    }
+
+    .navbar-nav .nav-link:hover::before {
+        left: 100%;
+    }
+
+    .navbar-nav .nav-link:hover {
+        background: rgba(160, 82, 45, 0.15);
+        transform: translateX(10px);
+        color: var(--primary-color) !important;
+    }
+
+    .nav-buttons {
+        margin: 30px 30px 0 30px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+    }
+
+    .navbar-collapse.show .nav-buttons {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.35s;
+    }
+
+    .nav-buttons .btn {
+        width: 100%;
+        margin: 0;
+        padding: 15px 20px;
+        font-size: 1.1rem;
+        border-radius: 12px;
+        background: var(--gradient-primary);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nav-buttons .btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.3s ease;
+    }
+
+    .nav-buttons .btn:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    /* Закрытие меню при клике вне его */
+    .mobile-menu-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: transparent;
+        z-index: 9998;
+        display: none;
+    }
+
+    .mobile-menu-backdrop.active {
+        display: block;
+    }
 }
 
 /* ===== КНОПКИ ===== */
