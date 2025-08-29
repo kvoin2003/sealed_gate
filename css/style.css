@@ -124,27 +124,70 @@ body {
 /* ===== КНОПКИ ===== */
 .btn {
     font-weight: 500;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 12px 24px;
     border: none;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+    will-change: transform, box-shadow, filter;
+}
+
+/* Ripple effect */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: 0;
+}
+
+.btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn > * {
+    position: relative;
+    z-index: 1;
 }
 
 .btn-primary {
     background: var(--gradient-primary);
     color: white;
     box-shadow: var(--shadow-md);
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-xl), 0 0 20px rgba(139, 115, 85, 0.4);
     color: white;
+    filter: brightness(1.1);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(0.98);
+    transition: all 0.1s ease;
 }
 
 .btn-outline-light {
@@ -160,31 +203,65 @@ body {
 }
 
 .btn-white {
-    background: white;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     color: var(--primary-color);
-    border: 1px solid white;
+    border: 2px solid rgba(139, 115, 85, 0.2);
     box-shadow: var(--shadow-md);
+    backdrop-filter: blur(10px);
 }
 
 .btn-white:hover {
-    background: #f8f9fa;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     color: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-xl), 0 0 25px rgba(255, 255, 255, 0.8);
+    border-color: var(--primary-color);
+}
+
+.btn-white:active {
+    transform: translateY(-1px) scale(0.98);
+    transition: all 0.1s ease;
 }
 
 .btn-brown {
     background: var(--gradient-primary);
     color: white;
-    border: 1px solid var(--primary-color);
+    border: 2px solid transparent;
     box-shadow: var(--shadow-md);
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+    position: relative;
+}
+
+.btn-brown::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.btn-brown:hover::after {
+    opacity: 1;
 }
 
 .btn-brown:hover {
-    background: var(--primary-hover);
+    background: var(--gradient-primary);
     color: white;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-xl), 0 0 20px rgba(139, 115, 85, 0.5);
+    filter: brightness(1.15) saturate(1.1);
+}
+
+.btn-brown:active {
+    transform: translateY(-1px) scale(0.98);
+    transition: all 0.1s ease;
 }
 
 .btn-lg {
@@ -196,6 +273,62 @@ body {
     padding: 20px 40px;
     font-size: 1.2rem;
     font-weight: 600;
+}
+
+/* Pulse animation for CTA buttons */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(139, 115, 85, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(139, 115, 85, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(139, 115, 85, 0);
+    }
+}
+
+.btn-xl.btn-brown {
+    animation: pulse 2s ease-in-out infinite, gradientShift 4s ease infinite;
+}
+
+.btn-xl.btn-white {
+    animation: pulse 2s ease-in-out infinite;
+    --pulse-color: rgba(139, 115, 85, 0.3);
+}
+
+@keyframes pulse-white {
+    0% {
+        box-shadow: 0 0 0 0 var(--pulse-color, rgba(139, 115, 85, 0.3));
+    }
+    70% {
+        box-shadow: 0 0 0 10px transparent;
+    }
+    100% {
+        box-shadow: 0 0 0 0 transparent;
+    }
+}
+
+.btn-xl.btn-white {
+    animation: pulse-white 2s ease-in-out infinite;
+}
+
+/* Floating animation for hero buttons */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-1px);
+    }
+}
+
+.hero-actions .btn {
+    animation: float 4s ease-in-out infinite;
+}
+
+.hero-actions .btn:nth-child(2) {
+    animation-delay: 1s;
 }
 
 /* ===== ГЕРОЙ СЕКЦИЯ ===== */
