@@ -447,6 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initLazyLoading();
     initFormHandling();
     initKeyboardShortcuts();
+    initEnhancedMobileMenu();
 });
 
 // ===== CSS СТИЛИ ДЛЯ АНИМАЦИЙ =====
@@ -496,3 +497,87 @@ additionalStyles.textContent = `
     }
 `;
 document.head.appendChild(additionalStyles);
+
+// ===== УЛУЧШЕННОЕ МОБИЛЬНОЕ МЕНЮ =====
+function initEnhancedMobileMenu() {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    
+    // Создаем backdrop для закрытия меню
+    const backdrop = document.createElement('div');
+    backdrop.className = 'mobile-menu-backdrop';
+    document.body.appendChild(backdrop);
+    
+    // Обработчик переключения меню
+    navbarToggler.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        
+        if (!isExpanded) {
+            // Открываем меню
+            this.setAttribute('aria-expanded', 'true');
+            navbarCollapse.classList.add('show');
+            backdrop.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Добавляем звуковой эффект (опционально)
+            playMenuSound('open');
+        } else {
+            // Закрываем меню
+            closeMenu();
+        }
+    });
+    
+    // Закрытие меню при клике на backdrop
+    backdrop.addEventListener('click', closeMenu);
+    
+    // Закрытие меню при клике на ссылку
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            setTimeout(closeMenu, 300); // Небольшая задержка для плавности
+        });
+    });
+    
+    // Закрытие меню при нажатии Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navbarCollapse.classList.contains('show')) {
+            closeMenu();
+        }
+    });
+    
+    function closeMenu() {
+        navbarToggler.setAttribute('aria-expanded', 'false');
+        navbarCollapse.classList.remove('show');
+        backdrop.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Добавляем звуковой эффект (опционально)
+        playMenuSound('close');
+    }
+    
+    // Опциональные звуковые эффекты
+    function playMenuSound(type) {
+        // Можно добавить звуковые эффекты позже
+        // const audio = new Audio(`sounds/menu-${type}.mp3`);
+        // audio.volume = 0.3;
+        // audio.play().catch(() => {}); // Игнорируем ошибки
+    }
+    
+    // Добавляем визуальные эффекты при наведении
+    navLinks.forEach((link, index) => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(10px) scale(1.02)';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0) scale(1)';
+        });
+    });
+    
+    // Адаптивное поведение при изменении размера окна
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 991) {
+            closeMenu();
+        }
+    });
+}
