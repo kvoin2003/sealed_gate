@@ -274,20 +274,78 @@ function initButtonEffects() {
     const buttons = document.querySelectorAll('.btn');
     
     buttons.forEach(button => {
+        // Enhanced hover effects
         button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
+            this.style.transform = 'translateY(-4px) scale(1.02)';
+            
+            // Add glow effect based on button type
+            if (this.classList.contains('btn-brown') || this.classList.contains('btn-primary')) {
+                this.style.boxShadow = 'var(--shadow-xl), 0 0 20px rgba(139, 115, 85, 0.4)';
+            } else if (this.classList.contains('btn-white')) {
+                this.style.boxShadow = 'var(--shadow-xl), 0 0 25px rgba(255, 255, 255, 0.8)';
+            }
         });
         
         button.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
+            this.style.transform = '';
+            this.style.boxShadow = '';
         });
         
+        // Enhanced click effects
         button.addEventListener('mousedown', function() {
-            this.style.transform = 'translateY(0)';
+            this.style.transform = 'translateY(-1px) scale(0.98)';
+            this.style.transition = 'all 0.1s ease';
         });
         
         button.addEventListener('mouseup', function() {
-            this.style.transform = 'translateY(-2px)';
+            this.style.transform = 'translateY(-4px) scale(1.02)';
+            this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        });
+        
+        // Ripple effect
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(0);
+                animation: ripple 0.6s linear;
+                left: ${x}px;
+                top: ${y}px;
+                width: ${size}px;
+                height: ${size}px;
+                pointer-events: none;
+                z-index: 0;
+            `;
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+        
+        // Focus effects for accessibility
+        button.addEventListener('focus', function() {
+            if (!this.matches(':hover')) {
+                this.style.transform = 'translateY(-2px) scale(1.01)';
+                this.style.outline = '2px solid rgba(139, 115, 85, 0.5)';
+                this.style.outlineOffset = '2px';
+            }
+        });
+        
+        button.addEventListener('blur', function() {
+            this.style.outline = '';
+            this.style.outlineOffset = '';
+            if (!this.matches(':hover')) {
+                this.style.transform = '';
+            }
         });
     });
 }
@@ -484,6 +542,13 @@ additionalStyles.textContent = `
         opacity: 0;
         transform: translateY(30px);
         transition: all 0.6s ease;
+    }
+    
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
     }
     
     .loading.loaded {
