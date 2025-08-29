@@ -45,7 +45,8 @@ function initNavbarScroll() {
     window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
         
-        if (currentScrollY > 100) {
+        // Apply scrolled class when any scrolling happens
+        if (currentScrollY > 0) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
